@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
  */
 @Slf4j
 @RestController
-public class TomcatThreadAsyncThreadController {
+public class TomcatThreadAsyncThreadControllerWithFuture {
 
     private final ExecutorService es = Executors.newFixedThreadPool(10);
 
