@@ -2,12 +2,14 @@ package my.playground.playing.memoryburstkafka;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Profile("kafka")
 public class CommonService {
     private final TaskManager taskManager;
 

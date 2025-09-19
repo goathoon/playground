@@ -1,12 +1,14 @@
 package my.playground.playing.memoryburstkafka;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Semaphore;
 
 @Slf4j
 @Component
+@Profile("kafka")
 public class TaskManager {
     private final Semaphore semaphore = new Semaphore(100); // 운영 기준 맞춤
 
