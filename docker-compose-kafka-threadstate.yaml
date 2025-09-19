@@ -1,0 +1,24 @@
+services:
+  kafka:
+    image: bitnami/kafka:3.7
+    container_name: kafka-acl
+    ports:
+      - "9092:9092"
+    environment:
+      # KRaft 단일 노드(필수 최소값)
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@localhost:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      # --- ACL 활성화 & 기본 거부 ---
+      - KAFKA_CFG_AUTHORIZER_CLASS_NAME=org.apache.kafka.metadata.authorizer.StandardAuthorizer
+      - KAFKA_CFG_ALLOW_EVERYONE_IF_NO_ACL_FOUND=false
+      # 관리 편의를 위한 슈퍼유저(컨트롤 명령에만 사용)
+      - KAFKA_CFG_SUPER_USERS=User:admin
+
+      # 토픽 자동생성 끔(테스트 명확성)
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
+    restart: unless-stopped

@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    openfeign:
+      httpclient:
+        enabled: true
+        max-connections: 5000
+        max-connections-per-route: 5000
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: 1
+      # 메타데이터/버퍼에서 send()가 오래 기다리도록
+      max-block-ms: 600000        # 10분까지 send() 블록 허용 (핵심)
+      request-timeout-ms: 30000
+      delivery-timeout-ms: 120000
+      retries: 10
+      retry-backoff-ms: 100
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
