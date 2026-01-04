@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 
 public class ThreadPinningSynchronizedTestDifferent2 {
 
+
     private static final Object lock = new Object();
 
     public static void main(String[] args) {
-        System.out.println("availableProcessors = " + Runtime.getRuntime().availableProcessors());
 
         giveSomeTimeForJFRInit();
 
@@ -18,7 +18,13 @@ public class ThreadPinningSynchronizedTestDifferent2 {
 
                     synchronized (lock) {
                         // 시간은 오래 걸리지만 blocking은 없는 사례
+                        // 시간은 오래 걸리지만 blocking은 없는 사례
                         getFibonacci(40);
+//                        try {
+//                            Thread.sleep(50);
+//                        } catch (InterruptedException e) {
+//                            throw new RuntimeException(e);
+//                        }
                     }
 
                     System.out.println("AFTER  " + index + " - " + Thread.currentThread());
@@ -55,24 +61,24 @@ public class ThreadPinningSynchronizedTestDifferent2 {
 }
 
 /**
- * BEFORE 1 - VirtualThread[#27]/runnable@ForkJoinPool-1-worker-2
- * BEFORE 4 - VirtualThread[#30]/runnable@ForkJoinPool-1-worker-5
- * BEFORE 5 - VirtualThread[#31]/runnable@ForkJoinPool-1-worker-6
- * BEFORE 8 - VirtualThread[#34]/runnable@ForkJoinPool-1-worker-8
- * BEFORE 7 - VirtualThread[#33]/runnable@ForkJoinPool-1-worker-7
- * BEFORE 3 - VirtualThread[#29]/runnable@ForkJoinPool-1-worker-4
- * BEFORE 0 - VirtualThread[#26]/runnable@ForkJoinPool-1-worker-1
- * BEFORE 6 - VirtualThread[#32]/runnable@ForkJoinPool-1-worker-9
- * BEFORE 9 - VirtualThread[#35]/runnable@ForkJoinPool-1-worker-10
- * BEFORE 2 - VirtualThread[#28]/runnable@ForkJoinPool-1-worker-3
- * AFTER  1 - VirtualThread[#27]/runnable@ForkJoinPool-1-worker-2
- * AFTER  4 - VirtualThread[#30]/runnable@ForkJoinPool-1-worker-5
- * AFTER  5 - VirtualThread[#31]/runnable@ForkJoinPool-1-worker-2
- * AFTER  8 - VirtualThread[#34]/runnable@ForkJoinPool-1-worker-5
- * AFTER  7 - VirtualThread[#33]/runnable@ForkJoinPool-1-worker-2
- * AFTER  3 - VirtualThread[#29]/runnable@ForkJoinPool-1-worker-5
- * AFTER  0 - VirtualThread[#26]/runnable@ForkJoinPool-1-worker-2
- * AFTER  6 - VirtualThread[#32]/runnable@ForkJoinPool-1-worker-5
- * AFTER  9 - VirtualThread[#35]/runnable@ForkJoinPool-1-worker-2
- * AFTER  2 - VirtualThread[#28]/runnable@ForkJoinPool-1-worker-5
+ * BEFORE 5 - VirtualThread[#26]/runnable@ForkJoinPool-1-worker-6
+ * BEFORE 3 - VirtualThread[#24]/runnable@ForkJoinPool-1-worker-4
+ * BEFORE 4 - VirtualThread[#25]/runnable@ForkJoinPool-1-worker-5
+ * BEFORE 9 - VirtualThread[#30]/runnable@ForkJoinPool-1-worker-10
+ * BEFORE 6 - VirtualThread[#27]/runnable@ForkJoinPool-1-worker-7
+ * BEFORE 1 - VirtualThread[#22]/runnable@ForkJoinPool-1-worker-2
+ * BEFORE 2 - VirtualThread[#23]/runnable@ForkJoinPool-1-worker-3
+ * BEFORE 7 - VirtualThread[#28]/runnable@ForkJoinPool-1-worker-8
+ * BEFORE 0 - VirtualThread[#21]/runnable@ForkJoinPool-1-worker-1
+ * BEFORE 8 - VirtualThread[#29]/runnable@ForkJoinPool-1-worker-9
+ * AFTER  5 - VirtualThread[#26]/runnable@ForkJoinPool-1-worker-6
+ * AFTER  8 - VirtualThread[#29]/runnable@ForkJoinPool-1-worker-4
+ * AFTER  0 - VirtualThread[#21]/runnable@ForkJoinPool-1-worker-5
+ * AFTER  7 - VirtualThread[#28]/runnable@ForkJoinPool-1-worker-1
+ * AFTER  2 - VirtualThread[#23]/runnable@ForkJoinPool-1-worker-7
+ * AFTER  1 - VirtualThread[#22]/runnable@ForkJoinPool-1-worker-2
+ * AFTER  6 - VirtualThread[#27]/runnable@ForkJoinPool-1-worker-3
+ * AFTER  9 - VirtualThread[#30]/runnable@ForkJoinPool-1-worker-10
+ * AFTER  4 - VirtualThread[#25]/runnable@ForkJoinPool-1-worker-9
+ * AFTER  3 - VirtualThread[#24]/runnable@ForkJoinPool-1-worker-8
  */
